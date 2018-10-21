@@ -3,7 +3,8 @@
     <div>
       <NumberInputSpinner />
       <hr>
-      <NumberInputSpinner :integerOnly="false"  :step=".5" value='10' v-model="test"/>
+      {{ test }}
+      <NumberInputSpinner :integerOnly="true"  :step=".5" :min="1" :value='10' v-model="test"/>
     </div>
   </div>
 </template>

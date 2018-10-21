@@ -10,6 +10,8 @@
         :min="min"
         :max="max"
         debounce="500"
+        @change='validatePresence'
+        ref='numberInput'
     />
     <button @click.prevent="increaseNumber" :class="buttonClass">+</button>
   </div>
@@ -27,8 +29,8 @@ export default {
 
     props: {
         value: {
-          type: Number,
-          default: 0
+            type: Number,
+            default: 0
         },
         min: {
             default: 0,
@@ -39,20 +41,20 @@ export default {
             type: Number
         },
         step: {
-          default: 1,
-          type: Number
+            default: 1,
+            type: Number
         },
         inputClass: {
-          default: 'vnis__input',
-          type: String
+            default: 'vnis__input',
+            type: String
         },
         buttonClass: {
-          default: 'vnis__button',
-          type: String
+            default: 'vnis__button',
+            type: String
         },
         integerOnly: {
-          default: false,
-          type: Boolean
+            default: false,
+            type: Boolean
         }
     },
 
@@ -64,39 +66,45 @@ export default {
         isInteger(evt) {
             evt = (evt) ? evt : window.event;
             let key = evt.keyCode || evt.which;
-            key = String.fromCharCode( key );
+            let keyFromCode = String.fromCharCode( key );
             const regex = /[0-9]/;
 
-            if( !regex.test(key) ) {
+            if(!regex.test(keyFromCode) && key != 8) {
                 evt.returnValue = false;
                 if(evt.preventDefault) evt.preventDefault();
             }
         },
 
         isNumber(evt) {
-           evt = (evt) ? evt : window.event;
-           var charCode = (evt.which) ? evt.which : evt.keyCode;
+            evt = (evt) ? evt : window.event;
+            var charCode = (evt.which) ? evt.which : evt.keyCode;
 
-           if ((charCode > 31 && (charCode < 48 || charCode > 57)) && charCode !== 46) {
-               evt.preventDefault();
-           }
-           else {
-               return true;
-           }
-       },
+            if ((charCode > 31 && (charCode < 48 || charCode > 57)) && charCode !== 46) {
+                evt.preventDefault();
+            }
+            else {
+                return true;
+            }
+        },
 
-       validateInput(evt) {
-          if ( this.integerOnly === true) {
-            this.isInteger(evt);
-          }
-          else {
-              this.isNumber(evt);
-          }
-       },
+        validateInput(evt) {
+            if ( this.integerOnly === true) {
+                this.isInteger(evt);
+            }
+            else {
+                this.isNumber(evt);
+            }
+        },
 
-       inputValue(evt) {
-          this.numericValue = (evt.target.value) ? parseInt(evt.target.value) : this.min;
-       }
+        inputValue(evt) {
+            this.numericValue = (evt.target.value) ? parseInt(evt.target.value) : this.min;
+        },
+
+        validatePresence() {
+            if(this.$refs.numberInput.value === '') {
+                this.$refs.numberInput.value = this.numericValue;
+            }
+        }
     },
 
     watch: {
