@@ -116,6 +116,9 @@ export default {
             if( val <= this.max && val >= this.min ) {
                 this.$emit('input', val, oldVal );
             }
+        },
+        value: function(val) {
+            this.numericValue = val;
         }
     }
 };
