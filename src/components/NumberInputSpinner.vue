@@ -106,7 +106,7 @@ export default {
         },
 
         inputValue(evt) {
-            this.numericValue = (evt.target.value) ? parseInt(evt.target.value) : this.min;
+            this.numericValue = (Number(evt.target.value) || 0) ? parseInt(evt.target.value) : this.min;
         },
 
         validatePresence() {
