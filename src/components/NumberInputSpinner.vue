@@ -2,7 +2,7 @@
   <div class="vnis" >
     <button @click.prevent="decreaseNumber" :class="buttonClass">-</button>
     <input
-        type="number"
+        :type="inputType"
         v-bind:value="numericValue"
         @keypress="validateInput"
         @input="inputValue"
@@ -31,6 +31,10 @@ export default {
         value: {
             type: Number,
             default: 0
+        },
+        inputType: {
+            type: String,
+            default: 'number'
         },
         min: {
             default: 0,
