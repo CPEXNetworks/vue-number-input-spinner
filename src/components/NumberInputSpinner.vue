@@ -34,6 +34,10 @@ export default {
             type: Number,
             default: 0
         },
+        bypassCasting: {
+            type: Boolean,
+            default: false
+        },
         inputType: {
             type: String,
             default: 'number'
@@ -115,9 +119,9 @@ export default {
         },
 
         validatePresence() {
-            // if(this.$refs.numberInput.value === '') {
-            //     this.$refs.numberInput.value = this.numericValue;
-            // }
+            if(this.$refs.numberInput.value === '' && !this.bypassCasting) {
+                this.$refs.numberInput.value = this.numericValue;
+            }
 
             this.$emit('change', this.$refs.numberInput.value);
         }
@@ -125,11 +129,13 @@ export default {
 
     watch: {
         numericValue: function(val, oldVal){
-            if( val <= this.min ) { this.numericValue = parseInt(this.min); }
+            if( val <= this.min && !this.bypassCasting) { this.numericValue = parseInt(this.min); }
 
-            if( val >= this.max ) { this.numericValue = parseInt(this.max); }
+            if( val >= this.max && !this.bypassCasting) { this.numericValue = parseInt(this.max); }
 
             if( val <= this.max && val >= this.min ) {
+                this.$emit('input', val, oldVal );
+            } else if (this.bypassCasting) {
                 this.$emit('input', val, oldVal );
             }
         },
