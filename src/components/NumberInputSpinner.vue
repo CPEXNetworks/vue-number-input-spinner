@@ -24,13 +24,13 @@ export default {
 
     data: function () {
         return {
-            numericValue: this.value,
+            numericValue: Number(this.value) || 0,
         };
     },
 
     props: {
         value: {
-            type: Number,
+            type: [Number, String],
             default: 0
         },
         inputType: {
