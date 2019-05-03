@@ -129,8 +129,12 @@ export default {
 
     watch: {
         numericValue: function(val, oldVal){
-            if( val < this.min && (val != '' || !this.bypassCasting)) { 
-                this.numericValue = parseInt(this.min); 
+            if( val < this.min && (val != '' || !this.bypassCasting)) {
+                if (this.bypassCasting) {
+                    this.numericValue = null;
+                } else {
+                    this.numericValue = parseInt(this.min); 
+                }
             }
 
             if( val >= this.max && !this.bypassCasting ) { 
