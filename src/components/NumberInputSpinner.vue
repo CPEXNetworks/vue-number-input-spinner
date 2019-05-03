@@ -2,7 +2,7 @@
   <div class="vnis" >
     <button @click.prevent="decreaseNumber" :class="buttonClass">-</button>
     <input
-        :type="inputType"
+        type="number"
         v-bind:value="numericValue"
         @keypress="validateInput"
         @input="inputValue"
@@ -24,13 +24,13 @@ export default {
 
     data: function () {
         return {
-            numericValue: Number(this.value) || 0,
+            numericValue: this.value
         };
     },
 
     props: {
         value: {
-            type: [Number, String],
+            type: Number,
             default: 0
         },
         inputType: {
@@ -106,7 +106,7 @@ export default {
         },
 
         inputValue(evt) {
-            this.numericValue = (Number(evt.target.value) || 0) ? parseInt(evt.target.value) : this.min;
+            this.numericValue = evt.target.value ? parseInt(evt.target.value) : this.min;
         },
 
         validatePresence() {
@@ -129,7 +129,7 @@ export default {
             }
         },
         value: function(val) {
-            this.numericValue = Number(val) || 0;
+            this.numericValue = val;
         }
     }
 };
