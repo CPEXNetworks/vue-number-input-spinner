@@ -129,7 +129,7 @@ export default {
             }
         },
         value: function(val) {
-            this.numericValue = val;
+            this.numericValue = Number(val) || 0;
         }
     }
 };
