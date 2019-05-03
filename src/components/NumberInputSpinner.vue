@@ -13,6 +13,7 @@
         @change="validatePresence"
         ref="numberInput"
         :disabled="inputDisabled"
+        :placeholder="placeholder"
     />
     <button @click.prevent="increaseNumber" :class="buttonClass">+</button>
   </div>
@@ -36,6 +37,10 @@ export default {
         inputType: {
             type: String,
             default: 'number'
+        },
+        placeholder: {
+            type: String,
+            default: ''
         },
         inputDisabled: {
             type: Boolean,
