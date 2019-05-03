@@ -10,8 +10,9 @@
         :min="min"
         :max="max"
         debounce="500"
-        @change='validatePresence'
-        ref='numberInput'
+        @change="validatePresence"
+        ref="numberInput"
+        :disabled="inputDisabled"
     />
     <button @click.prevent="increaseNumber" :class="buttonClass">+</button>
   </div>
@@ -35,6 +36,10 @@ export default {
         inputType: {
             type: String,
             default: 'number'
+        },
+        inputDisabled: {
+            type: Boolean,
+            default: false
         },
         min: {
             default: 0,
