@@ -137,7 +137,7 @@ export default {
                 }
             }
 
-            if( val >= this.max && !this.bypassCasting ) { 
+            if( val >= this.max ) { 
                 this.numericValue = parseInt(this.max); 
             }
 
