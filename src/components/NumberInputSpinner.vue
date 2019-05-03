@@ -110,9 +110,9 @@ export default {
         },
 
         validatePresence() {
-            if(this.$refs.numberInput.value === '') {
-                this.$refs.numberInput.value = this.numericValue;
-            }
+            // if(this.$refs.numberInput.value === '') {
+            //     this.$refs.numberInput.value = this.numericValue;
+            // }
 
             this.$emit('change', this.$refs.numberInput.value);
         }
