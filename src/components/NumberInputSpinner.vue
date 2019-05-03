@@ -129,9 +129,13 @@ export default {
 
     watch: {
         numericValue: function(val, oldVal){
-            if( val <= this.min && !this.bypassCasting) { this.numericValue = parseInt(this.min); }
+            if( val < this.min && (val != '' || !this.bypassCasting)) { 
+                this.numericValue = parseInt(this.min); 
+            }
 
-            if( val >= this.max && !this.bypassCasting) { this.numericValue = parseInt(this.max); }
+            if( val >= this.max && !this.bypassCasting ) { 
+                this.numericValue = parseInt(this.max); 
+            }
 
             if( val <= this.max && val >= this.min ) {
                 this.$emit('input', val, oldVal );
